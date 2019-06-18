@@ -48,13 +48,17 @@ def matrix(row, col):
     for num in range(1,row*col+1):
         numbers.append(num)
 
-    if row == 1 and col == 1:
-        return [[1]]
-    elif row == 1 and col == 2:
-        return [[1,2]]
-    elif row == 2 and col == 2:
-        numbers[:2],numbers[2:]
-        return [[1,2],[4,3]]
+    if row == 1:
+        return [numbers]
+    elif row == 1:
+        return [numbers]
+    elif row == 2:
+        idx = (row * col + 1) // 2
+        return [numbers[:idx],sorted(numbers[idx:], reverse=True)]
+    elif row == 3:
+        l1 = slice()
+        idx = (row * col + 1) // 2
+        return [numbers[:idx],sorted(numbers[idx:], reverse=True)]
 
 class MatrizEspiralTest(unittest.TestCase):
     def test_matrix_1_1(self):
@@ -65,6 +69,13 @@ class MatrizEspiralTest(unittest.TestCase):
 
     def test_matrix_2_2(self):
         self.assertEqual(matrix(2,2),[[1,2],[4,3]])
+
+    def test_matrix_2_3(self):
+        self.assertEqual(matrix(2,3),[[1,2,3],[6,5,4]])
+
+    def test_matrix_3_3(self):
+        self.assertEqual(matrix(3,3),[[1,2,3],[8,9,4], [7,6,5]])
+
 
 if __name__ == "__main__":
     unittest.main()
