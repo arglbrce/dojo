@@ -56,9 +56,11 @@ def matrix(row, col):
         idx = (row * col + 1) // 2
         return [numbers[:idx],sorted(numbers[idx:], reverse=True)]
     elif row == 3:
-        l1 = slice()
-        idx = (row * col + 1) // 2
-        return [numbers[:idx],sorted(numbers[idx:], reverse=True)]
+        l1 = slice(col)
+        res = []
+        for r in range(row):
+            res.append(numbers[(r*col):(col*(r+1))])
+        return [res]
 
 class MatrizEspiralTest(unittest.TestCase):
     def test_matrix_1_1(self):
