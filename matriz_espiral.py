@@ -58,9 +58,18 @@ def matrix(row, col):
     elif row == 3:
         l1 = slice(col)
         res = []
-        for r in range(row):
-            res.append(numbers[(r*col):(col*(r+1))])
-        return [res]
+        i = row
+        j = col
+        start, stop  = 0, col
+        for i in range(1, 2 * row):
+            s = slice(start, stop)
+            res.append(numbers[s])
+            start += stop
+            stop = start + stop - 1
+
+        #for r in range(row):
+            #res.append(numbers[(r*col):(col*(r+1))])
+        return res
 
 class MatrizEspiralTest(unittest.TestCase):
     def test_matrix_1_1(self):
@@ -76,7 +85,8 @@ class MatrizEspiralTest(unittest.TestCase):
         self.assertEqual(matrix(2,3),[[1,2,3],[6,5,4]])
 
     def test_matrix_3_3(self):
-        self.assertEqual(matrix(3,3),[[1,2,3],[8,9,4], [7,6,5]])
+        #self.assertEqual(matrix(3,3),[[1,2,3],[8,9,4], [7,6,5]])
+        self.assertEqual(matrix(3,3),[[1,2,3], [4,5], [6,7], [8], [9]])
 
 
 if __name__ == "__main__":
